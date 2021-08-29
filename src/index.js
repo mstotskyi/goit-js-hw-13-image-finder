@@ -9,7 +9,6 @@ const refs = {
     loadMore: document.querySelector('.load-more-btn')
 }
 
-
 const picsApiService = new PicsApiService ();
 
 
