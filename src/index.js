@@ -27,13 +27,10 @@ function onLoadMore () {
     renderCard ()
 }
 
-
 function renderCard (pics){
     const picsCard = photoCardTpl (pics);
     refs.gallery.insertAdjacentHTML('beforeend', picsCard)
   }
-
-
 
 refs.search.addEventListener('submit', onSearch)
 refs.loadMore.addEventListener('click', onLoadMore)
