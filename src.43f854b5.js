@@ -11,4 +11,4 @@ var e,t=arguments[3];!function(t,r){"object"==typeof exports&&"object"==typeof m
 },{}],"Focm":[function(require,module,exports) {
 "use strict";require("./sass/main.scss");var e=t(require("./templates/photocardtpl.hbs")),r=t(require("./apiService.js"));function t(e){return e&&e.__esModule?e:{default:e}}const n={search:document.querySelector("#search-form"),gallery:document.querySelector(".gallery"),loadMore:document.querySelector(".load-more-btn")},c=new r.default;function u(e){e.preventDefault(),n.gallery.innerHTML="",c.query=e.currentTarget.elements.query.value.trim(),c.resetPage(),c.fetchPictures().then(e=>{s(e)}),s()}function a(){c.fetchPictures().then(e=>{s(e)}),s()}function s(r){const t=(0,e.default)(r);n.gallery.insertAdjacentHTML("beforeend",t)}n.search.addEventListener("submit",u),n.loadMore.addEventListener("click",a);
 },{"./sass/main.scss":"clu1","./templates/photocardtpl.hbs":"APHF","./apiService.js":"WgT8"}]},{},["Focm"], null)
-//# sourceMappingURL=/goit-js-hw-13-image-finder/src.e7248b69.js.map
+//# sourceMappingURL=/goit-js-hw-13-image-finder/src.43f854b5.js.map
