@@ -26,8 +26,18 @@
     data-action="close-lightbox"
   ></button>
 </div>
-<button class="load-more-btn" type="button">Load more</button>
-<a class="back_to_top" title="Наверх">↑</a>
+<button class="load-more-btn btn is-hidden" disabled type="button">
+      <span
+        class="spinner-border spinner-border-sm spinner is-hidden"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      <span class="label">Load more</span>
+</button>
+
+<a class="back_to_top" title="Наверх"><span class="material-icons">
+  arrow_upward
+  </span></a>
 
 
 </div>

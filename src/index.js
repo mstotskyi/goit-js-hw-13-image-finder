@@ -17,6 +17,7 @@ const refs = {
     modalCloseBtn: document.querySelector('button[data-action="close-lightbox"]'),
     overlayClickModalClose: document.querySelector('.lightbox__overlay'),
     modalIsOpenImg: document.querySelector('.lightbox__image'),
+    spinner: document.querySelector('.spinner'),
  
 }
 
@@ -30,28 +31,30 @@ const picsApiService = new PicsApiService ();
 
 function onSearch (e) {
     e.preventDefault();
-  picsApiService.query = e.currentTarget.elements.query.value.trim();
-if (picsApiService.query ==='') {
-   error({
-    title: 'Введите свой запрос',
-    text: ''
+    picsApiService.query = e.currentTarget.elements.query.value.trim();
+  if (picsApiService.query ==='') {
+    error({
+    title: 'Внимание!',
+    text: 'Поле запроса пустое!'
   }); 
   return
 }
 
+    loadMoreBtnShow ()
     refs.gallery.innerHTML = '';
- console.log(picsApiService.hits);
-   picsApiService.resetPage()
-   picsApiService.fetchPictures().then(pics=>{renderCard (pics), notice ({
-    title: `Найдено ${picsApiService.hits} совпадений`,
-    text: ''
+    picsApiService.resetPage();
+    loadMoreBtnDisabled ();
+    picsApiService.fetchPictures().then(pics=>{renderCard (pics), notice ({
+    title: `Поздравляем!`,
+    text: `Найдено ${picsApiService.hits} совпадений!`
   })})
-  //  renderCard ()
+      loadMoreBtnEnable ();
+
   }
 
 function onLoadMore () {
     picsApiService.fetchPictures().then(pics=>{renderCard (pics)})
-    // renderCard ()
+  
 }
 
 function renderCard (pics){
@@ -101,3 +104,20 @@ function closeModalOnESC(event) {
   modalIsClose ();
 };
 
+function loadMoreBtnShow () {
+  refs.loadMore.classList.remove('is-hidden');
+}
+
+function loadMoreBtnEnable () {
+  refs.loadMore.classList.remove('is-hidden');
+  refs.loadMore.disabled = false;
+  refs.spinner.classList.add('is-hidden');
+};
+
+function loadMoreBtnDisabled () { 
+  refs.loadMore.classList.remove('is-hidden');
+  refs.loadMore.disabled = true;
+  refs.spinner.classList.remove('is-hidden');
+}
+
+loadMoreBtnDisabled ()
