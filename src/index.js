@@ -1,5 +1,4 @@
 import './sass/main.scss';
-import '../node_modules/basicLightbox/dist/basicLightbox.min.css'
 import photoCardTpl from './templates/photocardtpl.hbs'
 import PicsApiService from './js/apiService.js'
 import OnTopBtn from './js/ontopbtn.js'
