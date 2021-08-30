@@ -15,6 +15,9 @@ html {
 li {
   list-style: none;
 }
+p {
+  margin: 0;
+}
 
 .link {
   text-decoration: none;
@@ -140,6 +143,8 @@ li {
 .stats {
   display: flex;
   justify-content: center;
+  align-items: center;
+
   font-size: 18px;
   
 }
@@ -162,6 +167,7 @@ li {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 3;
   position: fixed;
   top: 0;
   left: 0;
@@ -179,6 +185,7 @@ li {
 
 .lightbox__overlay {
   position: absolute;
+
   top: 0;
   left: 0;
   width: 100vw;
@@ -205,8 +212,8 @@ li {
 
 .lightbox__button {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: 20px;
+  right: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -236,7 +243,7 @@ li {
   position: fixed;
   bottom: 80px;
   right: 50px;
-  z-index: 9999;
+  z-index: 1;
   width: 50px;
   height: 50px;
   text-align: center;
@@ -261,6 +268,7 @@ li {
 
 .back_to_top-show .material-icons {
   font-size: 30px;
+  font-weight: 900;
 
 }
 .spinner-border-sm {

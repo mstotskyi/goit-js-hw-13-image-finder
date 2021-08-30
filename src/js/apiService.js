@@ -1,11 +1,9 @@
 export default class PicsApiService{
 
-
 constructor() {
 this.searchQuery ='';
 this.page = 1;
 this.hits = 0;
-
 }
 
 fetchPictures () {
@@ -26,17 +24,16 @@ incrementPage(){
 
 resetPage() {
     this.page = 1;
-    }
+}
 
 getHits (totalHits) {
-
     this.hits = totalHits
-
 }
 
 get query() {
     return this.searchQuery;
 }
+
 set query(newQuery) {
     this.searchQuery = newQuery;
 }

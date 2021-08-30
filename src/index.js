@@ -6,9 +6,6 @@ import '@pnotify/core/dist/BrightTheme.css';
 import "@pnotify/core/dist/PNotify.css";
 import { error, notice} from "@pnotify/core";
 
-
-
-
 const refs = {
     search: document.querySelector('#search-form'),
     gallery: document.querySelector('.gallery'),
@@ -18,16 +15,13 @@ const refs = {
     overlayClickModalClose: document.querySelector('.lightbox__overlay'),
     modalIsOpenImg: document.querySelector('.lightbox__image'),
     spinner: document.querySelector('.spinner'),
- 
-}
+ }
 
 const onTopBtn = new OnTopBtn ();
 
 onTopBtn.onTop();
 
-
 const picsApiService = new PicsApiService ();
-
 
 function onSearch (e) {
     e.preventDefault();
@@ -49,18 +43,17 @@ function onSearch (e) {
     text: `Найдено ${picsApiService.hits} совпадений!`
   })})
       loadMoreBtnEnable ();
-
-  }
+ }
 
 function onLoadMore () {
-    picsApiService.fetchPictures().then(pics=>{renderCard (pics)})
-  
+      picsApiService.fetchPictures().then(pics=>{renderCard (pics), scrollIntoView(pics[0].id)
+     })
 }
 
 function renderCard (pics){
     const picsCard = photoCardTpl (pics);
     refs.gallery.insertAdjacentHTML('beforeend', picsCard)
-  }
+}
 
 refs.search.addEventListener('submit', onSearch);
 refs.loadMore.addEventListener('click', onLoadMore);
@@ -75,8 +68,6 @@ function modalOpen (event){
   }
  modalIsOpen(event);
 };
-
-
 
 function modalIsOpen(event) {
   modalToggle();
@@ -120,4 +111,11 @@ function loadMoreBtnDisabled () {
   refs.spinner.classList.remove('is-hidden');
 }
 
-loadMoreBtnDisabled ()
+function scrollIntoView (picId) {
+  const element = document.getElementById(`${picId}`);
+      element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+}
+
