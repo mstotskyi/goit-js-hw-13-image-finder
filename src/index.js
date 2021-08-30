@@ -46,8 +46,11 @@ function onSearch (e) {
  }
 
 function onLoadMore () {
+      loadMoreBtnDisabled ();
       picsApiService.fetchPictures().then(pics=>{renderCard (pics), scrollIntoView(pics[0].id)
      })
+
+     loadMoreBtnEnable ();
 }
 
 function renderCard (pics){
