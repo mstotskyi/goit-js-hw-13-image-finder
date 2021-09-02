@@ -7,8 +7,8 @@ export default class OnTopBtn {
         'use strict';
       
         function trackScroll() {
-          var scrolled = window.pageYOffset;
-          var coords = document.documentElement.clientHeight;
+          const scrolled = window.pageYOffset;
+          const coords = document.documentElement.clientHeight;
       
           if (scrolled > coords) {
             goTopBtn.classList.add('back_to_top-show');
@@ -25,7 +25,7 @@ export default class OnTopBtn {
           }
         }
       
-        var goTopBtn = document.querySelector('.back_to_top');
+        const goTopBtn = document.querySelector('.back_to_top');
       
         window.addEventListener('scroll', trackScroll);
         goTopBtn.addEventListener('click', backToTop);

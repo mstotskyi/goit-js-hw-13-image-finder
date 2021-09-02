@@ -4,7 +4,7 @@ import PicsApiService from './js/apiService.js'
 import OnTopBtn from './js/ontopbtn.js'
 import '@pnotify/core/dist/BrightTheme.css';
 import "@pnotify/core/dist/PNotify.css";
-import { error, notice} from "@pnotify/core";
+import { error, notice, alert} from "@pnotify/core/dist/PNotify";
 
 const refs = {
     search: document.querySelector('#search-form'),
@@ -23,6 +23,8 @@ onTopBtn.onTop();
 
 const picsApiService = new PicsApiService ();
 
+
+
 function onSearch (e) {
     e.preventDefault();
     picsApiService.query = e.currentTarget.elements.query.value.trim();
@@ -33,24 +35,43 @@ function onSearch (e) {
   }); 
   return
 }
-
-    loadMoreBtnShow ()
+   picsApiService.fetchPictures().then(pics=>{
+      if (picsApiService.hits === 0){
+        alert ({
+          title: `Внимание!`,
+          text: `Некорректный запрос`
+        })   
+        return
+      } 
+      else {
+        loadMoreBtnShow ()
     refs.gallery.innerHTML = '';
-    picsApiService.resetPage();
     loadMoreBtnDisabled ();
-    picsApiService.fetchPictures().then(pics=>{renderCard (pics), notice ({
-    title: `Поздравляем!`,
-    text: `Найдено ${picsApiService.hits} совпадений!`
-  })})
-      loadMoreBtnEnable ();
+    picsApiService.resetPage();
+        renderCard (pics),
+        notice ({
+          title: `Поздравляем!`,
+          text: `Найдено ${picsApiService.hits} совпадений!`}),
+        loadMoreBtnEnable ()
+    };
+    scrollIntoView()
+  })
  }
 
 function onLoadMore () {
-      loadMoreBtnDisabled ();
-      picsApiService.fetchPictures().then(pics=>{renderCard (pics), scrollIntoView(pics[0].id)
-     })
+    loadMoreBtnDisabled ();
+    picsApiService.fetchPictures().then(pics=>{renderCard (pics),
+      loadMoreBtnEnable ()
+      scrollIntoView()
+   })
+}
 
-     loadMoreBtnEnable ();
+function scrollIntoView () {
+     const element = document.getElementById('body');
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: "end",
+      });
 }
 
 function renderCard (pics){
@@ -65,7 +86,6 @@ refs.gallery.addEventListener('click', modalOpen);
 function modalOpen (event){
 
   event.preventDefault();
-  console.log(event);
   if (event.target.nodeName !== "IMG"){
     return;
   }
@@ -106,19 +126,13 @@ function loadMoreBtnEnable () {
   refs.loadMore.classList.remove('is-hidden');
   refs.loadMore.disabled = false;
   refs.spinner.classList.add('is-hidden');
+  
+ 
 };
 
 function loadMoreBtnDisabled () { 
   refs.loadMore.classList.remove('is-hidden');
   refs.loadMore.disabled = true;
   refs.spinner.classList.remove('is-hidden');
-}
-
-function scrollIntoView (picId) {
-  const element = document.getElementById(`${picId}`);
-      element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
 }
 
