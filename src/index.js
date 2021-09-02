@@ -52,9 +52,8 @@ function onSearch (e) {
         notice ({
           title: `Поздравляем!`,
           text: `Найдено ${picsApiService.hits} совпадений!`}),
-        loadMoreBtnEnable ()
+        loadMoreBtnEnable (), scrollIntoView()
     };
-    scrollIntoView()
   })
  }
 
@@ -63,7 +62,7 @@ function onLoadMore () {
     picsApiService.fetchPictures().then(pics=>{renderCard (pics),
       loadMoreBtnEnable ()
       scrollIntoView()
-   })
+   }) 
 }
 
 function scrollIntoView () {
