@@ -38,31 +38,27 @@ loadMoreBtnHide()
     picsApiService.fetchPictures().then(pics=>{
       if (picsApiService.hits === 0) {
         loadMoreBtnHide()
-   notice ({
-    title: `Внимание!`,
-    text: `Не корректный запрос!`
-  })
-  return
+        notice ({
+          title: `Внимание!`,
+          text: `Не корректный запрос!`
+        })
+        return
       }
-      loadMoreBtnDisabled ();
-      renderCard (pics), 
-      scrollIntoView ()
-      notice ({
-    title: `Поздравляем!`,
-    text: `Найдено ${picsApiService.hits} совпадений!`
-  })
-  loadMoreBtnEnable ()
-
+        loadMoreBtnDisabled (),
+        renderCard (pics), 
+        notice ({
+          title: `Поздравляем!`,
+          text: `Найдено ${picsApiService.hits} совпадений!`
+      }),
+  loadMoreBtnEnable (), scrollIntoView ()
 })
       
  }
-
 function onLoadMore () {
      loadMoreBtnDisabled ();
       picsApiService.fetchPictures().then(pics=>{renderCard (pics), scrollIntoView(), loadMoreBtnEnable ()
      })
-
-     
+    
 }
 
 function renderCard (pics){
