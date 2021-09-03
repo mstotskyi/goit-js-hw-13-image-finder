@@ -57,6 +57,7 @@ p {
 .search-form__button {
   cursor: pointer;
   margin-left: 15px;
+  padding-top: 8px;
   background-color: lightblue;
   border-radius: 5px;
   width: 100px;
@@ -65,7 +66,6 @@ p {
     background-color: skyblue;
   }
 }
-
 
 
 .load-more-btn {
@@ -145,8 +145,7 @@ p {
   justify-content: center;
   align-items: center;
 
-  font-size: 15
-  px;
+  font-size: 14px;
   
 }
 
@@ -155,7 +154,7 @@ p {
   font-size: 15px;
 }
 .search-btn-icon {
-  font-size: 30px;
+  font-size: 50px;
 }
 
 .stats-item:not(:last-child) {
