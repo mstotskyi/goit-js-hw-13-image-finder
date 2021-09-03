@@ -24,6 +24,8 @@ const picsApiService = new PicsApiService ();
 function onSearch (e) {
     e.preventDefault();
     picsApiService.query = e.currentTarget.elements.query.value.trim();
+    refs.gallery.innerHTML = '';
+   
   if (picsApiService.query ==='') {
     error({
     title: 'Внимание!',
@@ -31,34 +33,32 @@ function onSearch (e) {
   }); 
   return
 } 
-
-    
-    refs.gallery.innerHTML = '';
     picsApiService.resetPage();
-       
     picsApiService.fetchPictures().then(pics=>{
       if (picsApiService.hits === 0) {
-        
    notice ({
     title: `Внимание!`,
     text: ``
   })
   return
       }
-      loadMoreBtnShow ()
-      loadMoreBtnDisabled (); 
-      renderCard (pics), notice ({
+      loadMoreBtnDisabled ();
+      renderCard (pics), 
+      scrollIntoView ()
+      notice ({
     title: `Поздравляем!`,
     text: `Найдено ${picsApiService.hits} совпадений!`
   })
-loadMoreBtnEnable ();
+  loadMoreBtnEnable ()
+
 })
       
  }
 
 function onLoadMore () {
+     
       loadMoreBtnDisabled ();
-      picsApiService.fetchPictures().then(pics=>{renderCard (pics), scrollIntoView(pics[0].id)
+      picsApiService.fetchPictures().then(pics=>{renderCard (pics), scrollIntoView()
      })
 
      loadMoreBtnEnable ();
@@ -72,20 +72,21 @@ function renderCard (pics){
 refs.search.addEventListener('submit', onSearch);
 refs.loadMore.addEventListener('click', onLoadMore);
 refs.gallery.addEventListener('click', modalOpen);
-function modalOpen (event){
 
+function modalOpen (event){
   event.preventDefault();
-  console.log(event);
   if (event.target.nodeName !== "IMG"){
     return;
   }
  modalIsOpen(event);
 };
+
 function modalIsOpen(event) {
   modalToggle();
   refs.modalIsOpenImg.src = event.target.dataset.source;
   refs.modalIsOpenImg.alt = event.target.alt;
 }
+
 function modalToggle(){
 refs.modal.classList.toggle('is-open')
 };
@@ -115,6 +116,12 @@ function loadMoreBtnDisabled () {
   refs.loadMore.classList.remove('is-hidden');
   refs.loadMore.disabled = true;
   refs.spinner.classList.remove('is-hidden');
+}
+
+function loadMoreBtnHide(){
+  refs.loadMore.classList.add('is-hidden');
+  refs.loadMore.disabled = true;
+  refs.spinner.classList.add('is-hidden');
 }
 
 function scrollIntoView () {
