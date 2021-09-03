@@ -33,12 +33,14 @@ function onSearch (e) {
   }); 
   return
 } 
+loadMoreBtnHide()
     picsApiService.resetPage();
     picsApiService.fetchPictures().then(pics=>{
       if (picsApiService.hits === 0) {
+        loadMoreBtnHide()
    notice ({
     title: `Внимание!`,
-    text: ``
+    text: `Не корректный запрос!`
   })
   return
       }
@@ -56,12 +58,11 @@ function onSearch (e) {
  }
 
 function onLoadMore () {
-     
-      loadMoreBtnDisabled ();
-      picsApiService.fetchPictures().then(pics=>{renderCard (pics), scrollIntoView()
+     loadMoreBtnDisabled ();
+      picsApiService.fetchPictures().then(pics=>{renderCard (pics), scrollIntoView(), loadMoreBtnEnable ()
      })
 
-     loadMoreBtnEnable ();
+     
 }
 
 function renderCard (pics){
